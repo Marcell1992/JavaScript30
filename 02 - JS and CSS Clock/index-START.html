@@ -7,6 +7,7 @@
 </head>
 <body>
 
+  <div class="demo"></div>
 
     <div class="clock">
       <div class="clock-face">
@@ -66,9 +67,45 @@
     }
 
   </style>
-
+    
   <script>
 
+const date = new Date();
+const seconds = date.getSeconds();
+const minutes = date.getMinutes();
+const hour = date.getHours();
+let weekDay;
+
+switch (date.getDay()) {
+  case 0:
+    weekDay = "Sunday";
+    break;
+  case 1:
+    weekDay = "Monday";
+    break;
+  case 2:
+    weekDay = "Tuesday";
+    break;
+  case 3:
+    weekDay = "Wednesday";
+    break;
+  case 4:
+    weekDay = "Thursday";
+    break;
+  case 5:
+    weekDay = "Friday";
+    break;
+  case 6:
+    weekDay = "Saturday";
+}
+
+/*
+  sec 360/60
+  min 360/60
+  hr 360/12
+*/
+
+document.querySelector(".demo").innerHTML = `${weekDay} ${hour}:${minutes}:${seconds} CAT`;
 
   </script>
 </body>

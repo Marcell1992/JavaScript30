@@ -64,16 +64,25 @@
       background: black;
       position: absolute;
       top: 50%;
+      transform-origin: 100%;
+      transition: all 1s;
+      transition-timing-function: cubic-bezier(0, 0, 0, 0);
     }
 
   </style>
     
   <script>
 
+setInterval(clockTimer, 1000);
+
+function clockTimer(){
 const date = new Date();
-const seconds = date.getSeconds();
-const minutes = date.getMinutes();
-const hour = date.getHours();
+let seconds = date.getSeconds();
+let minutes = date.getMinutes();
+let hour = date.getHours();
+let secondHand = document.querySelector('.second-hand');
+let minuteHand = document.querySelector('.min-hand');
+let hourHand = document.querySelector('.hour-hand');
 let weekDay;
 
 switch (date.getDay()) {
@@ -98,14 +107,11 @@ switch (date.getDay()) {
   case 6:
     weekDay = "Saturday";
 }
-
-/*
-  sec 360/60
-  min 360/60
-  hr 360/12
-*/
-
+secondHand.style.transform = `rotate(${360/60*seconds+90}deg)`;
+minuteHand.style.transform = `rotate(${360/60*minutes+90}deg)`;
+hourHand.style.transform = `rotate(${360/12*hour+90}deg)`;
 document.querySelector(".demo").innerHTML = `${weekDay} ${hour}:${minutes}:${seconds} CAT`;
+}
 
   </script>
 </body>

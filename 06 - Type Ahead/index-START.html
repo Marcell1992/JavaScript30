@@ -18,6 +18,35 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+  const search = document.querySelector('.search');
+  const suggestions = document.querySelector('.suggestions');
+  const cities = [];
+
+  fetch(endpoint)
+    .then(data => data.json())
+    .then(data => cities.push(...data))
+
+  function searchPop(search, cities) {
+    return cities.filter(area => {
+      const regex = new RegExp(search, 'gi');
+      return area.city.match(regex) || area.state.match(regex)
+    });  
+  }
+
+  function findCity(){
+    const matchSearch = searchPop(this.value, cities);
+    const html = matchSearch.map (place => {
+      return `
+      <li>
+        <span class='name'>${place.city}, ${place.state}</span>
+        <span class = 'population'>${place.population}</span>
+        `;
+    }).join('');
+    suggestions.innerHTML = html;
+  }
+
+  search.addEventListener('input', findCity);
+
 </script>
 </body>
 </html>

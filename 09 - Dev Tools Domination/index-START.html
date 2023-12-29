@@ -11,36 +11,54 @@
 
   <script>
     const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+    const p = document.querySelector('p');
 
     function makeGreen() {
-      const p = document.querySelector('p');
       p.style.color = '#BADA55';
       p.style.fontSize = '50px';
     }
 
     // Regular
+    console.log('Hello');
 
     // Interpolated
+    console.log('Hello, I am a %s string', 'variable');
 
     // Styled
+    console.log('%cI am some great text', 'font-size:20px');
 
     // warning!
+    console.warn('Sinking!');
 
     // Error :|
+    console.error('Oh no!');
 
     // Info
+    console.info('Fun fact is...');
 
     // Testing
+    console.assert(1 === 2, 'assertion has indeed failed');
+    console.assert(p.classList.contains('ouch'), 'That is wrong!');
 
     // clearing
-
+    //console.clear();
     // Viewing DOM Elements
-
+    //console.dir(p);
     // Grouping together
-
+    // console.group
+    // dog.name dog.age
+    // console.groupEnd();
     // counting
-
+    console.count('Wes');
+    console.count('Wes');
     // timing
+    //console.time('fetcing data');
+    //fetch();
+    // .then (json)
+    // .then
+    // console.timeEnd();
+
+    console.table(dogs);
 
   </script>
 </body>

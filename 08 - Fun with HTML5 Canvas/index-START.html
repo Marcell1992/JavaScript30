@@ -8,6 +8,50 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+
+  const canvas = document.querySelector('#draw');
+  const draw = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  draw.strokeStyle = '#BADA55';
+  draw.lineJoin = 'round';
+  draw.lineCap = 'round';
+  let isDrawing = false;
+  let lastX = 0;
+  let lastY = 0;
+  let hue = 0;
+  let direction = true;
+
+  canvas.addEventListener('mousedown', (e) => {
+    isDrawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+  canvas.addEventListener('mousemove', drawing);
+  canvas.addEventListener('mouseup', () => isDrawing = false);
+
+  function drawing(e) {
+    if (!isDrawing) return;
+    draw.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    draw.beginPath();
+    draw.moveTo(lastX, lastY);
+    draw.lineTo(e.offsetX, e.offsetY);
+    draw.stroke();
+    //Note to self: Structure array
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+
+    hue++;
+    if (hue >= 360) hue = 0;
+
+    if (draw.lineWidth >= 100 || draw.lineWidth <= 1){
+      direction = !direction;
+    }
+    if(direction){
+    draw.lineWidth++;
+    }else{
+      draw.lineWidth--;
+    }
+  }
+
 </script>
 
 <style>

@@ -97,6 +97,30 @@
   </div>
 
 <script>
+
+  const inbox = document.querySelector('.inbox');
+  const itemList = document.querySelectorAll('input');
+  let endPoint;
+
+itemList.forEach(item => {
+  item.addEventListener('click', shiftSelect);
+});
+
+  function shiftSelect(e){
+    let inBetween = false;
+    if (e.shiftKey && this.checked){
+      itemList.forEach(item =>{
+        if (item === this || item === endPoint){
+          inBetween = !inBetween;
+        }
+        if(inBetween){
+          item.checked = true;
+        }
+      });
+    }
+    endPoint = this;
+  }
+
 </script>
 </body>
 </html>

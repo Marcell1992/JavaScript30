@@ -38,7 +38,9 @@ var cornify_add = function (options) {
   div.className = "__cornify_unicorn";
   div.style.zIndex = 143143;
   div.style.outline = 0;
-  div.onclick = cornify_add; // Click for more magic.
+  div.addEventListener('click', cornify_add);
+
+  //div.onclick = cornify_add; // Click for more magic.
 
   // Get the window width and height - requires some cross browser checking.
   if (typeof window.innerHeight == "number") {
@@ -74,7 +76,7 @@ var cornify_add = function (options) {
     img.style.opacity = 1;
   };
 
-  // Used as a cache buster so the browser makes a new request every time instead of usign the previous, cached one.
+  // Used as a cache buster so the browser makes a new request every time instead of using the previous, cached one.
   var currentTime = new Date();
   var submitTime = currentTime.getTime();
 
@@ -84,9 +86,7 @@ var cornify_add = function (options) {
   }
 
   // Construct our unicorn & rainbow request.
-  var url = `https://www.cornify.com/corns/${
-    Math.random() > 0.5 ? "r" : "u"
-  }${Math.ceil(Math.random() * 7)}.gif`;
+  var url = `https://www.cornify.com/corns/r7.gif`;
 
   // Add younicorns if requested.
   if (options && (options.y || options.younicorns)) {
@@ -102,7 +102,7 @@ var cornify_add = function (options) {
 
   div.style.transform = transform;
   div.style.MozTransform = transform;
-  div.style.webkitTransform = transform;
+  div.style.transform = transform;
 
   img.setAttribute("src", url);
 
@@ -115,7 +115,7 @@ var cornify_add = function (options) {
     var result = "rotate(" + angle + "deg) scale(" + size + "," + size + ")";
     img.style.transform = result;
     img.style.MozTransform = result;
-    img.style.webkitTransform = result;
+    img.style.transform = result;
   };
 
   div.onmouseout = function () {
@@ -124,7 +124,7 @@ var cornify_add = function (options) {
     var result = "rotate(" + angle + "deg) scale(" + size + "," + size + ")";
     img.style.transform = result;
     img.style.MozTransform = result;
-    img.style.webkitTransform = result;
+    img.style.transform = result;
   };
 
   // Append our container DIV to the page.
@@ -352,7 +352,7 @@ var cornami = {
         clearTimeout(cornami.clear);
         return;
       } else {
-        cornami.input += event.keyCode;
+        cornami.input += event.code;
         if (cornami.input == cornami.pattern) {
           cornify_add();
         }

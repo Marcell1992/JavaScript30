@@ -49,7 +49,46 @@
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+/* ***Closest to solution I could get***
 
+const bandEl = document.querySelector('#bands');
+
+const bands2 = bands.filter(band => {
+  if (band.startsWith('The') || band.startsWith('An') || band.startsWith('A')){
+    return band;
+  }
+});
+
+function sortBands(){
+  for(let i = bands.length -1 ; i >= 0; i--){
+    const li = document.createElement('li');
+    li.textContent = bands[i];
+    bandEl.appendChild(li);
+  }
+}
+
+sortBands();
+*/
+
+// ***Solution***
+const bandEl = document.querySelector('#bands');
+
+function strip(bandName){
+  return bandName.replace(/^(a |the |an )/i, '').trim();
+}
+
+const sortedBands = bands.sort((a,b) => strip(a) > strip(b) ? 1 : -1);
+
+// After looking up the above solution, I implemented what I already deduced:
+sortedBands.forEach(band => {
+  const li = document.createElement('li');
+  li.textContent = band;
+  bandEl.appendChild(li);
+});
+
+/* Lessons: As before, I need to think more about functions within functions. I was considering this, but without looking up the solution, I could not fully deduce how to return 1 and -1 in sort() so I disregarded it
+My 'bands2' attempt was "close", yet still a failure as I did not think to use a function as used in the solution. I was more trying to use methods of string.slice, then sort, then return the sliced string in its original state, but I could not think of a way to keep its original state without writing many lines of code.
+*/
 </script>
 
 </body>

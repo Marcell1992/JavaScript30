@@ -183,6 +183,56 @@
     </li>
   </ul>
 <script>
+
+  const videos = Array.from(document.querySelectorAll('[data-time]'));
+
+  /*      ***My attempt***
+   I rate it 7/10 as it only accounts for minute/seconds long videos, however the solution does as well. I also did not fulfil the challenge by using reduce method, but (as mentioned in a previous challenge) I tried to solve it with the least amount of googling.
+  const videos = document.querySelectorAll('[data-time]');
+  let totalMinutes = 0;
+  let totalSeconds = 0;
+  let totalHours = 0;
+
+  videos.forEach(video =>{
+    const d = new Date(`January 2, 1970 00:${video.dataset['time']}`);
+    totalMinutes += d.getMinutes();
+    totalSeconds += d.getSeconds();
+
+    if(totalMinutes >= 60){
+      totalHours++;
+      totalMinutes %= 60;
+    }
+    if(totalSeconds >= 60){
+      totalMinutes++;
+      totalSeconds %= 60;
+    }
+
+  });
+  console.log(totalHours+ ":"+ totalMinutes +":"+ totalSeconds);
+  */
+
+//       ***Solution***
+  const seconds = videos
+  .map(node => node.dataset.time)
+  .map(timeCode => {
+    const [mins, sec] = timeCode.split(':').map(parseFloat);
+    return (mins * 60) + sec;
+  })
+  .reduce((total, seconds) => total + seconds);
+
+  let secondsLeft = seconds;
+  const hours = Math.floor(secondsLeft / 3600);
+  secondsLeft %= 3600;
+  const mins = Math.floor(secondsLeft / 60);
+  secondsLeft %= 60;
+
+  console.log(hours+":" +mins + ":"+ secondsLeft);
+
+  /* Lessons:
+      Learn more about ES6 destructuring
+      Learn more about Chaining functions
+  */
+
 </script>
 </body>
 </html>

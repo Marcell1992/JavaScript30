@@ -60,6 +60,50 @@
     /*Compass: https://thenounproject.com/search/?q=compass&i=592352*/
   </style>
   <script>
+    /* ***My attempt
+          *****I do not have an API key, so I hope the below works!*****
+    const arrow = document.querySelector('.arrow');
+    const speedValue = document.querySelector('.speed-value');
+    const units = document.querySelector('.units');
+
+    function setWindCompass() {
+      if (navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(position =>{
+          const latitude = position.coords.latitude.toFixed(2);
+          const longitude = position.coords.longitude.toFixed(2);
+          const weather = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid={API key}`;
+
+            fetch(weather)
+            .then(response =>{
+              if(!response.ok){
+                throw new Error('Oh no!');
+              }return response.json();
+            })
+            .then(data => {
+              speedValue.innerHTML = data.wind.speed;
+              arrow.style.transform = `rotate(${data.wind.deg}deg)`;
+              units.innerHTML = data.wind.speed.unit;
+            })
+        });
+      }
+    }
+    
+    setWindCompass();
+    */
+
+    //  ***Solution***
+
+    const arrow = document.querySelector('.arrow');
+    const speed = document.querySelector('.speed-value');
+
+    navigator.geolocation.watchPosition((data) => {
+      console.log(data);
+      speed.textContent = data.coords.speed;
+      arrow.style.transform = `rotate(${data.coords.heading}deg)`;
+    }, (err) => {
+      console.error(err);
+    });
+
   </script>
 </body>
 </html>

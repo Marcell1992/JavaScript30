@@ -27,7 +27,63 @@
     </div>
 
   <script>
-    // 👀👀👀👀👀👀👀👀👀👀👀👀👀👀👀
+    /*  ****My attempt****
+        I didn't get to exactly how it should work, but I got close'ish
+
+    const links = document.querySelectorAll('a');
+    const span = document.createElement('span');
+    span.classList.add('highlight');
+    document.body.append(span);
+    let activeLink;
+
+    links.forEach(link =>{
+      link.addEventListener('mouseenter', highlight)
+    });
+
+    links.forEach(link => {
+      link.addEventListener('mouseleave', unhighlight)
+    });
+
+    function highlight (e){
+        activeLink = e.target.cloneNode(true);
+        span.appendChild(activeLink);
+        span.style.left = `${e.pageX}px`;
+        span.style.top = `${e.pageY}px`;
+      }
+
+    function unhighlight(e){
+      span.removeChild(activeLink);
+    }*/
+
+    // ****Solution****
+
+    const links = document.querySelectorAll('a');
+    const span = document.createElement('span');
+    span.classList.add('highlight');
+    document.body.append(span);
+
+    links.forEach(link => {
+      link.addEventListener('mouseenter', highlight)
+    });
+
+    function highlight(){
+      // Gives all information about where element lives:
+      const linkCoords = this.getBoundingClientRect();
+      const coords = {
+        width: linkCoords.width,
+        height: linkCoords.height,
+        top: linkCoords.top + window.scrollY,
+        left: linkCoords.left + window.scrollX
+      };
+      span.style.width = `${coords.width}px`;
+      span.style.height = `${coords.height}px`;
+      span.style.transform = `translate(${coords.left}px, ${coords.top}px)`;
+    }
+
+    // Lessons:
+    // Objects in general. Most Lessons/Examples up to now basically only contained name, surname, age, etc.
+    // Good to get a variety and broaden one's perspective of what else objects can be used for.
+
   </script>
 </body>
 </html>

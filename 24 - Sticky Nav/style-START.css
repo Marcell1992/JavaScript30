@@ -4,6 +4,7 @@ html {
   font-family: 'helvetica neue';
   font-size: 20px;
   font-weight: 200;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -23,6 +24,11 @@ body {
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
   transform: scale(0.98);
   transition: transform 0.5s;
+  overflow: hidden;
+}
+
+body.fixed-nav .site-wrap {
+  transform: scale(1);
 }
 
 header {
@@ -50,6 +56,11 @@ nav {
   z-index: 1;
 }
 
+body.fixed-nav nav {
+  position: sticky;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.1);
+}
+
 nav ul {
   margin: 0;
   padding:0;
@@ -63,6 +74,10 @@ nav li {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.fixed-nav li.logo {
+  max-width: 500px;
 }
 
 li.logo {
@@ -85,4 +100,32 @@ nav a {
   color: white;
   transition: all 0.2s;
   text-transform: uppercase;
+}
+
+.align-left {
+  float: left;
+  margin-right: 20px;
+}
+
+.align-right {
+  float: right;
+  margin-left: 20px;
+}
+
+.slide-in {
+  opacity: 0;
+  transition: all 1s;
+}
+
+.align-left.slide-in {
+  transform: translateX(-30%) scale(0.95);
+}
+
+.align-right.slide-in {
+  transform: translateX(30%) scale(0.95);
+}
+
+.slide-in.active {
+  opacity: 1;
+  transform: translateX(0%) scale(1);
 }

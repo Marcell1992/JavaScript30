@@ -23,6 +23,7 @@ body {
   box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.05);
   transform: scale(0.98);
   transition: transform 0.5s;
+  overflow: hidden;
 }
 
 body.fixed-nav .site-wrap {

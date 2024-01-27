@@ -41,8 +41,46 @@
   }
 </style>
 
-<button></button>
+<button>Button</button>
 <script>
+
+// My "attempt" if you could call it that more a lesson than a challenge
+
+const button = document.querySelector('button');
+
+button.addEventListener('click', clickOnce, {once:true}); // Useful for store checkouts
+
+function clickOnce(){
+  alert('Clicked!!');
+  this.disabled = true;
+}
+
+const one = document.querySelector('.one');
+const two = document.querySelector('.two');
+const three = document.querySelector('.three');
+
+one.addEventListener('click', clickOne, {once:true, capture:true});
+two.addEventListener('click', clickTwo, {once:true, capture:true});
+two.addEventListener('click', clickTwoTwo, {once:true, capture:false});
+three.addEventListener('click', clickThree, {once:true, capture:false});
+
+function clickOne(e){
+  alert('One capturing');
+}
+
+function clickTwo(e){
+  alert('Two capturing');
+  // e.stopPropagation();
+}
+
+function clickTwoTwo(e){
+  alert('Two bubbling');
+}
+
+function clickThree(e){
+  alert('Three capturing');
+  // e.stopPropagation();
+}
 
 </script>
 </body>
